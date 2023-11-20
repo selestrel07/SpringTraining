@@ -11,7 +11,12 @@
 
     <bean id="classicalMusicBean" class="ru.kulevich.springcourse.ClassicalMusic"/>
 
-    <bean id="rockMusicBean" class="ru.kulevich.springcourse.RockMusic"/>
+    <bean id="rockMusicBean"
+          class="ru.kulevich.springcourse.RockMusic"
+          init-method="initialization"
+          destroy-method="destruction"
+          factory-method="getInstance"
+    />
 
     <bean id="popMusicBean" class="ru.kulevich.springcourse.PopMusic"/>
 
