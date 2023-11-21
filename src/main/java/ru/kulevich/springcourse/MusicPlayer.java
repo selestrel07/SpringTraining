@@ -1,7 +1,10 @@
 package ru.kulevich.springcourse;
 
+import org.springframework.stereotype.Component;
+
 import java.util.List;
 
+@Component
 public class MusicPlayer {
 
     private List<Music> musicList;
@@ -9,6 +12,10 @@ public class MusicPlayer {
     private int volume;
 
     public MusicPlayer() {
+    }
+
+    public MusicPlayer(List<Music> musicList) {
+        this.musicList = musicList;
     }
 
     public void playMusic() {

@@ -2,6 +2,8 @@ package ru.kulevich.springcourse;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
+
 public class TestSpring {
 
     public static void main(String[] args) {
@@ -9,9 +11,13 @@ public class TestSpring {
                 "applicationContext.xml"
         );
 
-        RockMusic rockMusic = context.getBean("rockMusicBean", RockMusic.class);
+        Music rockMusic = context.getBean("rockMusicBean", Music.class);
 
-        rockMusic.getSong();
+        Music classicalMusic = context.getBean("classicalMusicBean", Music.class);
+
+        MusicPlayer musicPlayer = new MusicPlayer(List.of(rockMusic, classicalMusic));
+
+        musicPlayer.playMusic();
 
         context.close();
     }
