@@ -1,44 +1,29 @@
 package ru.kulevich.springcourse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Random;
 
 @Component
 public class MusicPlayer {
 
-    private List<Music> musicList;
-    private String name;
-    private int volume;
+    private RockMusic rockMusic;
+    private ClassicalMusic classicalMusic;
 
-    public MusicPlayer() {
+    @Autowired
+    public MusicPlayer(RockMusic rockMusic, ClassicalMusic classicalMusic) {
+        this.rockMusic = rockMusic;
+        this.classicalMusic = classicalMusic;
     }
 
-    public MusicPlayer(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public void playMusic() {
-        musicList.forEach(c -> System.out.println("Playing: " + c.getSong()));
-    }
-
-    public void setMusicList(List<Music> musicList) {
-        this.musicList = musicList;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getVolume() {
-        return volume;
-    }
-
-    public void setVolume(int volume) {
-        this.volume = volume;
+    public String playMusic(MusicGenre genre) {
+        int songIndex = new Random().nextInt(3);
+        return "Playing:" + switch(genre) {
+            case ROCK -> rockMusic.getSongs().get(songIndex);
+            case CLASSICAL -> classicalMusic.getSongs().get(songIndex);
+            default -> null;
+        };
     }
 }
